@@ -1,0 +1,12 @@
+.header{
+    display: flex;
+    min-height: 10vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+li{
+    list-style: none;
+}
