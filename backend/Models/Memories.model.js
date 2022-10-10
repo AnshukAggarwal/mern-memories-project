@@ -9,7 +9,9 @@ const memoriesSchema = mongoose.Schema({
     type: String,
     required: [true, "Please add a description"],
   },
-  imageSrc: String,
+  imageSrc: {
+    type: String,
+  },
   likeCount: {
     type: Number,
     default: 0,

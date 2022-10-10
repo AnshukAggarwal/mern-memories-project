@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
 const mongoose = require("mongoose");
 const memoriesRouter = require("./Routes/memories.routes");
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
-const MONGODB_URL =
-  "mongodb+srv://anshukaggarwal:anshukaggarwal123@cluster0.yhsgcyf.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URL = process.env.DBURL;
 
 const app = express(); //initialize app
 
