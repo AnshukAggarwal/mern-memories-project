@@ -5,7 +5,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 const memoriesRouter = require("./Routes/memories.routes");
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 const MONGODB_URL = process.env.DBURL;
 

@@ -10,6 +10,25 @@ const getMemories = async (req, res) => {
   }
 };
 
+const getMemory = async (req, res) => {
+  try {
+    const selectedMemory = await memoriesModel.findById(req.params.id);
+    res.status(200).json(selectedMemory);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const deleteMemory = async (req, res) => {
+  try {
+    const selectedMemory = await memoriesModel.findById(req.params.id);
+    selectedMemory.remove();
+    res.status(200).json(selectedMemory);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 // const getMemories = (req, res) => {
 //   try {
 //     res.status(200).json(memories);
@@ -20,4 +39,6 @@ const getMemories = async (req, res) => {
 
 module.exports = {
   getMemories,
+  getMemory,
+  deleteMemory,
 };
