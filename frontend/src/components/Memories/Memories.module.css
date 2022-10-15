@@ -2,3 +2,9 @@ h2{
     text-align: center;
 }
 
+.memories{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}

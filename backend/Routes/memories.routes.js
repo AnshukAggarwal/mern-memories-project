@@ -4,10 +4,14 @@ const {
   getMemories,
   getMemory,
   deleteMemory,
+  createMemory,
+  editMemory,
 } = require("../Controllers/memories.controller");
 
 router.get("/", getMemories);
 router.get("/:id", getMemory);
 router.delete("/delete/:id", deleteMemory);
+router.post("/add", createMemory);
+router.put("/edit/:id", editMemory);
 
 module.exports = router;

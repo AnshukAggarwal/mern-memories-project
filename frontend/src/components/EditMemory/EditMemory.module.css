@@ -1,0 +1,34 @@
+.form{
+    min-width: 600px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    width: 70%;
+}
+
+input{
+    flex-basis: 80%;
+}
+
+.form-btn{
+    border: 1px solid #1ac5d1;
+}
+
+button{
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    color: #1ac5d1;
+}

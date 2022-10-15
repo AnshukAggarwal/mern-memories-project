@@ -1,17 +1,15 @@
 .memory{
-    border: 2px solid grey;
+    width: 650px;
     border-radius: 10px;
     margin-bottom: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 20px 30px;
+    color: whitesmoke;
+    background-color: #1ac5d1;
 }
 
 .memory_img_container{
-    width: 300px;
-    height: 220px;
+    width: 600px;
+    height: 250px;
 }
 
 .memory_img_container img{
@@ -27,7 +25,17 @@
     justify-content: space-between;
 }
 
-button{
+.btn{
+    border: 1px solid #1a8ed1;
+    color:#1a8ed1;
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    cursor: pointer;
     background-color: transparent;
-    padding: 6px 15px;
+    font: inherit;
+}
+
+a{
+    text-decoration: none;
+    color:#1a8ed1;
 }

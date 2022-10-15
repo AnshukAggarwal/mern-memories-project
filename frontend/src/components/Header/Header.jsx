@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -9,7 +10,11 @@ const Header = () => {
       </div>
       <nav>
         <ul>
-          <li>Create a memory</li>
+          <li>
+            <Link to="/memories/add" className="btn">
+              Create a memory
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

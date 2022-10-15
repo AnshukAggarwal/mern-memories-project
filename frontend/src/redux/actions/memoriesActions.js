@@ -38,6 +38,22 @@ export const deleteMemoryAsync = (id) => {
   };
 };
 
-// export const fetchMemories = () => ({
-//   type: "FETCH_MEMORIES",
-// });
+export const addMemoryAsync = (memory) => {
+  return async (dispatch) => {
+    const { data } = await axios.post(
+      "http://localhost:5000/memories/add",
+      memory
+    );
+    dispatch({ type: "ADD_MEMORY", payload: data });
+  };
+};
+
+export const updateMemoryAsync = (memory, id) => {
+  return async (dispatch) => {
+    const { data } = await axios.put(
+      `http://localhost:5000/memories/edit/${id}`,
+      memory
+    );
+    dispatch({ type: "UPDATE_MEMORY", payload: data });
+  };
+};

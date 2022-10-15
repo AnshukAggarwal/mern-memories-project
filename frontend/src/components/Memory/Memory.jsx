@@ -10,7 +10,9 @@ const Memory = ({ data }) => {
   const dispatch = useDispatch();
 
   const deleteMemoryHandler = () => {
-    dispatch(deleteMemoryAsync(_id));
+    if (window.confirm(`Are you sure you want to delete ${title}?`)) {
+      dispatch(deleteMemoryAsync(_id));
+    }
   };
 
   return (
@@ -23,10 +25,12 @@ const Memory = ({ data }) => {
         <p>{description}</p>
       </section>
       <section className={styles["memory_actions"]}>
-        <button>
+        <button className={styles.btn}>
           <Link to={`/memories/edit/${_id}`}>Edit</Link>
         </button>
-        <button onClick={deleteMemoryHandler}>Delete</button>
+        <button onClick={deleteMemoryHandler} className={styles.btn}>
+          Delete
+        </button>
       </section>
     </article>
   );
