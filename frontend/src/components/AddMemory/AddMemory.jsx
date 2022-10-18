@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { addMemoryAsync } from "../../redux/actions/memoriesActions";
+import FileBase64 from "react-file-base64";
 import styles from "./AddMemory.module.css";
 
 const AddMemory = () => {
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
-  const [image, setImage] = useState(
-    "https://blog.hootsuite.com/wp-content/uploads/2017/10/snapchat-memories-940x470.jpg"
-  );
+  const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -21,22 +20,37 @@ const AddMemory = () => {
     setdescription(e.target.value);
   };
 
-  const handleImgChange = (e) => {
-    setImage(e.target.value);
+  const handleImgChange = ({ base64 }) => {
+    setImage(base64);
   };
 
-  const addMemoryHandler = () => {
+  const addMemoryHandler = (e) => {
+    e.preventDefault();
     const memoryToAdd = {
       title,
       description,
+      image,
     };
     dispatch(addMemoryAsync(memoryToAdd));
     history.push("/memories");
+    // if (!title || !description || !image) {
+    //   alert("Please fill out all fields");
+    // } else {
+    //   const memoryToAdd = {
+    //     title,
+    //     description,
+    //     image,
+    //   };
+    //   dispatch(addMemoryAsync(memoryToAdd));
+    //   history.push("/memories");
+    // }
   };
 
   return (
     <section>
-      <button>Go Back</button>
+      <Link to="/memories" className="btn">
+        Back to List
+      </Link>
       <h1>Add a memory</h1>
       <form onSubmit={addMemoryHandler} className={styles.form}>
         <div className={styles["form-control"]}>
@@ -61,13 +75,14 @@ const AddMemory = () => {
         </div>
         <div className={styles["form-control"]}>
           <label>Image</label>
-          <input
+          {/* <input
             type="text"
             placeholder="Image"
             name="image"
             value={image}
             onChange={handleImgChange}
-          />
+          /> */}
+          <FileBase64 type="file" multiple={false} onDone={handleImgChange} />
         </div>
         <div className={styles["form-btn"]}>
           <button>Submit</button>

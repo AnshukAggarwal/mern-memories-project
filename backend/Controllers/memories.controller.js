@@ -31,12 +31,11 @@ const deleteMemory = async (req, res) => {
 };
 
 const createMemory = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, image } = req.body;
   const newMemory = new memoriesModel({
     title: title,
     description: description,
-    imageSrc:
-      "https://blog.hootsuite.com/wp-content/uploads/2017/10/snapchat-memories-940x470.jpg",
+    imageSrc: image,
     likeCount: 0,
   });
   try {
@@ -49,14 +48,13 @@ const createMemory = async (req, res) => {
 };
 
 const editMemory = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, image } = req.body;
   const { id } = req.params;
 
   const updatedMemory = {
     title: title,
     description: description,
-    imageSrc:
-      "https://blog.hootsuite.com/wp-content/uploads/2017/10/snapchat-memories-940x470.jpg",
+    imageSrc: image,
     likeCount: 0,
   };
   try {

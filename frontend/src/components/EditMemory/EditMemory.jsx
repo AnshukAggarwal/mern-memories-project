@@ -5,6 +5,7 @@ import {
   fetchMemoryAsync,
   updateMemoryAsync,
 } from "../../redux/actions/memoriesActions";
+import FileBase64 from "react-file-base64";
 import styles from "./EditMemory.module.css";
 
 const EditMemory = () => {
@@ -14,9 +15,7 @@ const EditMemory = () => {
   //console.log(selectedMemory);
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
-  const [image, setImage] = useState(
-    "https://blog.hootsuite.com/wp-content/uploads/2017/10/snapchat-memories-940x470.jpg"
-  );
+  const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -28,6 +27,7 @@ const EditMemory = () => {
     if (selectedMemory) {
       setTitle(selectedMemory.title);
       setdescription(selectedMemory.description);
+      setImage(selectedMemory.imageSrc);
     }
   }, [selectedMemory]);
 
@@ -39,14 +39,21 @@ const EditMemory = () => {
     setdescription(e.target.value);
   };
 
-  const handleImgChange = (e) => {
-    setImage(e.target.value);
+  const handleImgChange = ({ base64 }) => {
+    // if (!base64) {
+    //   setImage(selectedMemory.imageSrc);
+    // } else {
+    //   setImage(base64);
+    // }
+    setImage(base64);
   };
 
-  const updateMemoryHandler = () => {
+  const updateMemoryHandler = (e) => {
+    e.preventDefault();
     const updatedMemory = {
       title,
       description,
+      image,
     };
 
     dispatch(updateMemoryAsync(updatedMemory, id));
@@ -83,14 +90,15 @@ const EditMemory = () => {
                 onChange={handleDescChange}
               />
             </div>
+            <div className={styles["memory_img_container"]}>
+              <img src={selectedMemory.imageSrc} alt="memory" />
+            </div>
             <div className={styles["form-control"]}>
               <label>Image</label>
-              <input
-                type="text"
-                placeholder="Image"
-                name="image"
-                value={image}
-                onChange={handleImgChange}
+              <FileBase64
+                type="file"
+                multiple={false}
+                onDone={handleImgChange}
               />
             </div>
             <div className={styles["form-btn"]}>
