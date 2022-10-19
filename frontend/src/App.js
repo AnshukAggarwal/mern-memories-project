@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Memories from "./components/Memories/Memories";
 import EditMemory from "./components/EditMemory/EditMemory";
 import AddMemory from "./components/AddMemory/AddMemory";
+import Homepage from "./pages/Homepage/Homepage";
 
 function App() {
   return (
@@ -11,9 +12,7 @@ function App() {
       <Header />
       <main>
         <Switch>
-          <Route path="/" exact>
-            <Redirect to="/memories" />
-          </Route>
+          <Route path="/" component={Homepage} exact />
           <Route path="/memories" component={Memories} exact />
           <Route path="/memories/edit/:id" component={EditMemory} />
           <Route path="/memories/add" component={AddMemory} />
