@@ -75,13 +75,6 @@ const AddMemory = () => {
         </div>
         <div className={styles["form-control"]}>
           <label>Image</label>
-          {/* <input
-            type="text"
-            placeholder="Image"
-            name="image"
-            value={image}
-            onChange={handleImgChange}
-          /> */}
           <FileBase64 type="file" multiple={false} onDone={handleImgChange} />
         </div>
         <div className={styles["form-btn"]}>
