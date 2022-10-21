@@ -12,8 +12,8 @@ const MONGODB_URL = process.env.DBURL;
 
 const app = express(); //initialize app
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })); //added to data sent via the post method from the front-end
+app.use(express.json({ limit: "30mb", extended: true }));
+app.use(express.urlencoded({ limit: "30mb", extended: true })); //added to data sent via the post method from the front-end
 app.use(cors());
 
 app.use("/memories", memoriesRouter);

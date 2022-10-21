@@ -7,6 +7,7 @@ import {
 } from "../../redux/actions/memoriesActions";
 import FileBase64 from "react-file-base64";
 import styles from "./EditMemory.module.css";
+import Loader from "../../UI/Loader/Loader";
 
 const EditMemory = () => {
   const { id } = useParams();
@@ -65,7 +66,7 @@ const EditMemory = () => {
         Back to List
       </Link>
       {loading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : (
         <>
           <h2>Editing details for {selectedMemory.title}</h2>

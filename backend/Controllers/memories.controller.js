@@ -66,10 +66,32 @@ const editMemory = async (req, res) => {
   }
 };
 
+const searchMemories = async (req, res) => {
+  const { query } = req.params;
+  let filteredMemories = [];
+  try {
+    if (!query) {
+      filteredMemories = await memoriesModel.find();
+    } else {
+      filteredMemories = await memoriesModel.find({
+        $or: [
+          { title: { $regex: query, $options: "i" } },
+          { description: { $regex: query, $options: "i" } },
+        ],
+      });
+    }
+    res.status(200).json(filteredMemories);
+  } catch (error) {
+    console.log(error.message);
+    res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getMemories,
   getMemory,
   deleteMemory,
   createMemory,
   editMemory,
+  searchMemories,
 };
