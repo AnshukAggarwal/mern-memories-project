@@ -47,6 +47,11 @@ const memoriesReducer = (state = INITIAL_STATE, action) => {
         ...state,
         memories: action.payload,
       };
+    case "SEARCH_MEMORY":
+      return {
+        ...state,
+        memories: action.payload,
+      };
     default:
       return state;
   }

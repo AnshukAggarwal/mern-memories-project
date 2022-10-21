@@ -2,7 +2,7 @@ h2{
     text-align: center;
 }
 
-.memories{
+.memories, .memories_container{
     display: flex;
     flex-direction: column;
     justify-content:center;

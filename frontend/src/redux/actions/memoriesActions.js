@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const API = axios.create({ baseURL: "http://localhost:5000" });
+
 export const fetchMemoriesAsync = () => {
   return async (dispatch) => {
     try {
@@ -47,5 +49,12 @@ export const updateMemoryAsync = (memory, id) => {
   return async (dispatch) => {
     const { data } = await axios.put(`/memories/edit/${id}`, memory);
     dispatch({ type: "UPDATE_MEMORY", payload: data });
+  };
+};
+
+export const searchMemoriesAsync = (searchTerm) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/memories/search/${searchTerm}`);
+    dispatch({ type: "SEARCH_MEMORY", payload: data });
   };
 };
