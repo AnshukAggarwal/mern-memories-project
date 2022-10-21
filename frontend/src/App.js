@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Memories from "./components/Memories/Memories";
 import EditMemory from "./components/EditMemory/EditMemory";
