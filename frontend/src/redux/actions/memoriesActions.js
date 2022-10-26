@@ -2,11 +2,14 @@ import axios from "axios";
 
 //const API = axios.create({ baseURL: "http://localhost:5000" });
 
-export const fetchMemoriesAsync = (pageNumber) => {
+export const fetchMemoriesAsync = (pageNumber, searchTerm) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "FETCH_MEMORIES_START" });
-      const { data } = await axios.get(`/memories?page=${pageNumber}`);
+      const { data } = await axios.get(
+        `/memories?query=${searchTerm || "none"}&page=${pageNumber}`
+      );
+
       dispatch({ type: "FETCH_MEMORIES_SUCCESS", payload: data });
     } catch (error) {
       dispatch({ type: "FETCH_MEMORIES_FAIL", payload: error.message });
@@ -52,10 +55,10 @@ export const updateMemoryAsync = (memory, id) => {
   };
 };
 
-export const searchMemoriesAsync = (searchTerm) => {
-  return async (dispatch) => {
-    const { data } = await axios.get(`/memories/search/${searchTerm}`);
-    console.log(data);
-    dispatch({ type: "SEARCH_MEMORY", payload: data });
-  };
-};
+// export const searchMemoriesAsync = (searchTerm) => {
+//   return async (dispatch) => {
+//     const { data } = await axios.get(`/memories/search/${searchTerm}`);
+//     console.log(data);
+//     dispatch({ type: "SEARCH_MEMORY", payload: data });
+//   };
+// };
