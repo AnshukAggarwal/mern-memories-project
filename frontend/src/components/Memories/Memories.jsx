@@ -10,7 +10,6 @@ import Pagination from "../Pagination/Pagination";
 const Memories = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  //const [memoriesPerPage] = useState(2);
   const { memories, loading, totalPages } = useSelector(
     (state) => state.memories
   );
@@ -18,13 +17,8 @@ const Memories = () => {
 
   useEffect(() => {
     document.title = "Memories";
-    dispatch(fetchMemoriesAsync(pageNumber, searchTerm));
+    dispatch(fetchMemoriesAsync(pageNumber));
   }, [dispatch, pageNumber]);
-
-  // Get current posts
-  // const indexOfLastMemory = currentPage * memoriesPerPage;
-  // const indexOfFirstMemory = indexOfLastMemory - memoriesPerPage;
-  // const currentMemories = memories.slice(indexOfFirstMemory, indexOfLastMemory);
 
   //change page #
   const paginate = (number) => setPageNumber(number);
