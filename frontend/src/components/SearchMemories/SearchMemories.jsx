@@ -7,6 +7,16 @@ const SearchMemories = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
+  //debouncing
+  // useEffect(() => {
+  //   if (searchTerm) {
+  //     const getData = setTimeout(() => {
+  //       dispatch(searchMemoriesAsync(searchTerm));
+  //     }, 2000);
+  //     return () => clearTimeout(getData);
+  //   }
+  // }, [dispatch, searchTerm]);
+
   const searchTermHandler = (e) => {
     setSearchTerm(e.target.value);
   };

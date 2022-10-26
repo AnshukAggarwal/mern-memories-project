@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { addMemoryAsync } from "../../redux/actions/memoriesActions";
@@ -11,6 +11,10 @@ const AddMemory = () => {
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    document.title = "Add Memory";
+  }, []);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);

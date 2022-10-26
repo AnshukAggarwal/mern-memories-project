@@ -9,8 +9,8 @@ const {
   searchMemories,
 } = require("../Controllers/memories.controller");
 
-router.get("/search/:query?", searchMemories);
 router.get("/", getMemories);
+router.get("/search/:query?", searchMemories);
 router.get("/:id", getMemory);
 router.delete("/delete/:id", deleteMemory);
 router.post("/add", createMemory);

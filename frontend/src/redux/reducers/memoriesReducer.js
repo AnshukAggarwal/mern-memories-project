@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   selectedMemory: {},
+  totalPages: 0,
 };
 
 const memoriesReducer = (state = INITIAL_STATE, action) => {
@@ -10,7 +11,12 @@ const memoriesReducer = (state = INITIAL_STATE, action) => {
     case "FETCH_MEMORIES_START":
       return { ...state, loading: true };
     case "FETCH_MEMORIES_SUCCESS":
-      return { ...state, loading: false, memories: action.payload };
+      return {
+        ...state,
+        loading: false,
+        memories: action.payload.memories,
+        totalPages: action.payload.totalPages,
+      };
     case "FETCH_MEMORIES_FAIL":
       return { ...state, loading: false, error: action.payload };
     case "FETCH_MEMORY_START":
@@ -50,7 +56,8 @@ const memoriesReducer = (state = INITIAL_STATE, action) => {
     case "SEARCH_MEMORY":
       return {
         ...state,
-        memories: action.payload,
+        memories: action.payload.filteredMemories,
+        totalPages: action.payload.totalPages,
       };
     default:
       return state;

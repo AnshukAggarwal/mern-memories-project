@@ -1,9 +1,19 @@
 const memoriesModel = require("../Models/Memories.model");
 
 const getMemories = async (req, res) => {
+  //console.log(req.query);
+  const pageSize = 2;
+  const page = parseInt(req.query.page || "0");
+  const total = await memoriesModel.countDocuments({});
   try {
-    const memories = await memoriesModel.find();
-    res.status(200).json(memories);
+    const memories = await memoriesModel
+      .find({})
+      .limit(pageSize)
+      .skip(pageSize * page);
+    res.status(200).json({
+      memories,
+      totalPages: Math.ceil(total / pageSize),
+    });
   } catch (error) {
     console.log(error.message);
     res.status(404).json({ message: error.message });
@@ -69,18 +79,43 @@ const editMemory = async (req, res) => {
 const searchMemories = async (req, res) => {
   const { query } = req.params;
   let filteredMemories = [];
+  const pageSize = 2;
+  // try {
+  //   if (!query) {
+  //     filteredMemories = await memoriesModel.find().limit(pageSize);
+  //   } else {
+  //     filteredMemories = await memoriesModel
+  //       .find({
+  //         $or: [
+  //           { title: { $regex: query, $options: "i" } },
+  //           { description: { $regex: query, $options: "i" } },
+  //         ],
+  //       })
+  //       .limit(pageSize);
+  //   }
+  //   const total = filteredMemories.length;
+  //   console.log(total);
+  //   res
+  //     .status(200)
+  //     .json({ filteredMemories, totalPages: Math.ceil(total / pageSize) });
+  // } catch (error) {
+  //   console.log(error.message);
+  //   res.status(404).json({ message: error.message });
+  // }
   try {
-    if (!query) {
-      filteredMemories = await memoriesModel.find();
-    } else {
-      filteredMemories = await memoriesModel.find({
-        $or: [
-          { title: { $regex: query, $options: "i" } },
-          { description: { $regex: query, $options: "i" } },
-        ],
-      });
-    }
-    res.status(200).json(filteredMemories);
+    filteredMemories = await memoriesModel.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+      ],
+    });
+    console.log(filteredMemories.length);
+
+    const total = filteredMemories.length;
+    console.log(total);
+    res
+      .status(200)
+      .json({ filteredMemories, totalPages: Math.ceil(total / pageSize) });
   } catch (error) {
     console.log(error.message);
     res.status(404).json({ message: error.message });

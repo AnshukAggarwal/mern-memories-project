@@ -21,6 +21,7 @@ const EditMemory = () => {
   const history = useHistory();
 
   useEffect(() => {
+    document.title = "Edit Memory";
     dispatch(fetchMemoryAsync(id));
   }, [id, dispatch]);
 
