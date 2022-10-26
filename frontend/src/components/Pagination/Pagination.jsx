@@ -5,7 +5,13 @@ const Pagination = ({ totalPages, paginate }) => {
   return (
     <section>
       {pages.map((number) => (
-        <button onClick={() => paginate(number)} key={number}>
+        <button
+          onClick={() => {
+            console.log(number);
+            paginate(number);
+          }}
+          key={number}
+        >
           {number + 1}
         </button>
       ))}

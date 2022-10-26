@@ -9,6 +9,7 @@ import Pagination from "../Pagination/Pagination";
 
 const Memories = () => {
   const [pageNumber, setPageNumber] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
   //const [memoriesPerPage] = useState(2);
   const { memories, loading, totalPages } = useSelector(
     (state) => state.memories
@@ -16,9 +17,9 @@ const Memories = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(totalPages);
-    dispatch(fetchMemoriesAsync(pageNumber));
-  }, [dispatch, pageNumber, totalPages]);
+    document.title = "Memories";
+    dispatch(fetchMemoriesAsync(pageNumber, searchTerm));
+  }, [dispatch, pageNumber]);
 
   // Get current posts
   // const indexOfLastMemory = currentPage * memoriesPerPage;
@@ -28,6 +29,14 @@ const Memories = () => {
   //change page #
   const paginate = (number) => setPageNumber(number);
 
+  const searchTermHandler = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const searchMemoriesHandler = () => {
+    dispatch(fetchMemoriesAsync(pageNumber, searchTerm));
+  };
+
   return (
     <div className={styles.memories_container}>
       <h2>Memories</h2>
@@ -36,7 +45,11 @@ const Memories = () => {
       ) : (
         <section className={styles.memories}>
           <Pagination totalPages={totalPages} paginate={paginate} />
-          <SearchMemories />
+          <SearchMemories
+            searchTerm={searchTerm}
+            searchTermHandler={searchTermHandler}
+            searchMemoriesHandler={searchMemoriesHandler}
+          />
           {memories.map((memory) => (
             <Memory data={memory} key={memory._id} />
           ))}

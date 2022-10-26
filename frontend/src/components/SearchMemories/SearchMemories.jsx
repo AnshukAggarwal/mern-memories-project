@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { searchMemoriesAsync } from "../../redux/actions/memoriesActions";
 import styles from "./SearchMemories.module.css";
 
-const SearchMemories = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const dispatch = useDispatch();
-
+const SearchMemories = ({
+  searchTerm,
+  searchTermHandler,
+  searchMemoriesHandler,
+}) => {
   //debouncing
   // useEffect(() => {
   //   if (searchTerm) {
@@ -17,13 +17,6 @@ const SearchMemories = () => {
   //   }
   // }, [dispatch, searchTerm]);
 
-  const searchTermHandler = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const searchMemoriesHandler = () => {
-    dispatch(searchMemoriesAsync(searchTerm));
-  };
   return (
     <section className={styles.search}>
       <input
