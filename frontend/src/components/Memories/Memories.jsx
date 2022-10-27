@@ -17,7 +17,10 @@ const Memories = () => {
 
   useEffect(() => {
     document.title = "Memories";
-    dispatch(fetchMemoriesAsync(pageNumber));
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchMemoriesAsync(pageNumber, searchTerm));
   }, [dispatch, pageNumber]);
 
   //change page #

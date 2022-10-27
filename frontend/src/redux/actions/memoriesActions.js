@@ -24,7 +24,6 @@ export const fetchMemoriesAsync = (pageNumber, searchTerm) => {
       const { data } = await axios.get(
         `/memories?query=${searchTerm || "none"}&page=${pageNumber}`
       );
-
       dispatch({ type: FETCH_MEMORIES_SUCCESS, payload: data });
     } catch (error) {
       dispatch({ type: FETCH_MEMORIES_FAIL, payload: error.message });
@@ -49,7 +48,6 @@ export const deleteMemoryAsync = (id) => {
     try {
       dispatch({ type: DELETE_MEMORY_START });
       const { data } = await axios.delete(`/memories/delete/${id}`);
-      //console.log(data);
       dispatch({ type: DELETE_MEMORY_SUCCESS, payload: data });
     } catch (error) {
       dispatch({ type: DELETE_MEMORY_FAIL, payload: error.message });
@@ -62,7 +60,6 @@ export const addMemoryAsync = (memory) => {
     try {
       dispatch({ type: ADD_MEMORY_START });
       const { data } = await axios.post("/memories/add", memory);
-      console.log(data);
       dispatch({ type: ADD_MEMORY_SUCCESS, payload: data });
     } catch (error) {
       dispatch({ type: ADD_MEMORY_FAIL, payload: error.message });

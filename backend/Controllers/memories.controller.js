@@ -5,7 +5,7 @@ const getMemories = async (req, res) => {
   const { query } = req.query;
   const page = parseInt(req.query.page || "0");
   try {
-    if (query === "none" || "") {
+    if (query === "none") {
       const memories = await memoriesModel
         .find({})
         .limit(pageSize)
@@ -104,6 +104,8 @@ const createMemory = async (req, res) => {
 };
 
 const editMemory = async (req, res) => {
+  const pageSize = 2;
+  const page = 0;
   const { title, description, image } = req.body;
   const { id } = req.params;
 
@@ -115,8 +117,15 @@ const editMemory = async (req, res) => {
   };
   try {
     await memoriesModel.findByIdAndUpdate(id, updatedMemory, { new: true });
-    const updatedMemories = await memoriesModel.find();
-    res.status(201).json(updatedMemories);
+    const updatedMemories = await memoriesModel
+      .find()
+      .limit(pageSize)
+      .skip(pageSize * page);
+    const total = await memoriesModel.countDocuments({});
+    res.status(201).json({
+      memories: updatedMemories,
+      totalPages: Math.ceil(total / pageSize),
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

@@ -74,7 +74,8 @@ const memoriesReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_MEMORY:
       return {
         ...state,
-        memories: action.payload,
+        memories: action.payload.memories,
+        totalPages: action.payload.totalPages,
       };
 
     default:
