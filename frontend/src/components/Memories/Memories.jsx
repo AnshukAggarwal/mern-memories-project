@@ -19,6 +19,17 @@ const Memories = () => {
     document.title = "Memories";
   }, []);
 
+  // useEffect(() => {
+  //   if (searchTerm === "") {
+  //     dispatch(fetchMemoriesAsync(pageNumber, "none"));
+  //   } else {
+  //     const getMemories = setTimeout(() => {
+  //       dispatch(fetchMemoriesAsync(pageNumber, searchTerm));
+  //     }, 3000);
+  //     return () => clearTimeout(getMemories);
+  //   }
+  // }, [dispatch, pageNumber, searchTerm]);
+
   useEffect(() => {
     dispatch(fetchMemoriesAsync(pageNumber, searchTerm));
   }, [dispatch, pageNumber]);
