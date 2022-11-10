@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Prompt } from "react-router-dom";
 import { addMemoryAsync } from "../../redux/actions/memoriesActions";
 import FileBase64 from "react-file-base64";
 import styles from "./AddMemory.module.css";
@@ -9,6 +9,7 @@ const AddMemory = () => {
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
   const [image, setImage] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -18,10 +19,12 @@ const AddMemory = () => {
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
+    setIsAdding(e.target.value.length > 0);
   };
 
   const handleDescChange = (e) => {
     setdescription(e.target.value);
+    setIsAdding(e.target.value.length > 0);
   };
 
   const handleImgChange = ({ base64 }) => {
@@ -50,6 +53,10 @@ const AddMemory = () => {
     // }
   };
 
+  const test = () => {
+    setIsAdding(false);
+  };
+
   return (
     <section>
       <Link to="/memories" className="btn">
@@ -57,6 +64,10 @@ const AddMemory = () => {
       </Link>
       <h1>Add a memory</h1>
       <form onSubmit={addMemoryHandler} className={styles.form}>
+        <Prompt
+          when={isAdding}
+          message={"Are you sure you want to leave. You have unsaved data?"}
+        />
         <div className={styles["form-control"]}>
           <label>Title</label>
           <input
@@ -82,7 +93,7 @@ const AddMemory = () => {
           <FileBase64 type="file" multiple={false} onDone={handleImgChange} />
         </div>
         <div className={styles["form-btn"]}>
-          <button>Submit</button>
+          <button onClick={test}>Submit</button>
         </div>
       </form>
     </section>
