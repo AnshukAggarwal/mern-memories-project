@@ -26,7 +26,7 @@ const Memory = ({ data }) => {
         <section className={styles["memory_img_container"]}>
           <img src={imageSrc} alt="memory" />
         </section>
-        <section>
+        <section className={styles["memory_details"]}>
           <p>{title}</p>
           <p>{description}</p>
         </section>
