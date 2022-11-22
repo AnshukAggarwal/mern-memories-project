@@ -53,7 +53,7 @@ const AddMemory = () => {
     // }
   };
 
-  const test = () => {
+  const isAddingHandler = () => {
     setIsAdding(false);
   };
 
@@ -93,7 +93,7 @@ const AddMemory = () => {
           <FileBase64 type="file" multiple={false} onDone={handleImgChange} />
         </div>
         <div className={styles["form-btn"]}>
-          <button onClick={test}>Submit</button>
+          <button onClick={isAddingHandler}>Submit</button>
         </div>
       </form>
     </section>

@@ -1,13 +1,13 @@
-.home{
-    display: flex;
-    flex-direction: column;
-    min-width: 600px;
-    margin-top: 10rem;
-    justify-content: center;
-    align-items: center;
+.home {
+  display: flex;
+  flex-direction: column;
+  /* min-width: 600px; */
+  margin-top: 10rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.intro{
-    padding: 2rem 1rem;
-    margin-bottom: 3rem;
+.intro {
+  padding: 2rem 1rem;
+  margin-bottom: 3rem;
 }
